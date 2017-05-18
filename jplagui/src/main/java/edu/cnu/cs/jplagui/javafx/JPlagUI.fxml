@@ -11,13 +11,12 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.input.KeyCodeCombination?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cnu.cs.jplagui.javafx.JPlagUIController">
    <top>
@@ -44,10 +43,10 @@
    <center>
       <BorderPane BorderPane.alignment="CENTER">
          <center>
-            <ScrollPane fx:id="scroll" prefHeight="100.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-              </content>
+            <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
+               <content>
+                  <TextArea fx:id="areaOutput" editable="false" />
+               </content>
             </ScrollPane>
          </center>
          <top>
@@ -64,14 +63,14 @@
                   </VBox>
                   <VBox spacing="10.0">
                      <children>
-                        <TextField editable="false" prefWidth="300.0">
+                        <TextField fx:id="fieldLocation" editable="false" prefWidth="300.0">
                            <cursor>
                               <Cursor fx:constant="NONE" />
                            </cursor>
                         </TextField>
-                        <ChoiceBox fx:id="language" onDragDetected="#languageSelected" />
-                        <CheckBox fx:id="recurse" mnemonicParsing="false" onAction="#recurseSelected" text="Recurse sub-directories" />
-                        <CheckBox fx:id="webBrowser" mnemonicParsing="false" onAction="#webBrowserSelected" text="Show results in web browser" />
+                        <ChoiceBox fx:id="comboLanguage" onDragDetected="#comboLanguageSelected" />
+                        <CheckBox fx:id="checkRecurse" mnemonicParsing="false" onAction="#checkRecurseSelected" text="Recurse sub-directories" />
+                        <CheckBox fx:id="checkWebBrowser" mnemonicParsing="false" onAction="#checkWebBrowserSelected" text="Show results in web browser" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -79,8 +78,8 @@
                   </VBox>
                   <VBox spacing="10.0">
                      <children>
-                        <Button fx:id="browse" mnemonicParsing="false" onAction="#browsePressed" text="Browse" />
-                        <Button fx:id="run" mnemonicParsing="false" onAction="#runPressed" text="Run JPlag" />
+                        <Button fx:id="buttonBrowse" mnemonicParsing="false" onAction="#buttonBrowsePressed" text="Browse" />
+                        <Button fx:id="buttonRun" mnemonicParsing="false" onAction="#buttonRunPressed" text="Run JPlag" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
