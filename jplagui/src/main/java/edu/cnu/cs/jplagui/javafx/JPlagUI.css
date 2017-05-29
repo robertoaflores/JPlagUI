@@ -5,13 +5,16 @@
 .aboutDialog > *.button-bar > *.container{
     -fx-background-color: #a9e200;
 }
-*/
 .aboutDialog > *.label.content{
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
+*/
+.aboutDialog > *.label.content{
+    -fx-font-size: 12px;
+}
 .aboutDialog:header *.header-panel{
-    -fx-background-color: #a59c31;
+    -fx-background-color: #52FF33;
 }
 /*
 .aboutDialog:header *.header-panel *.label{
