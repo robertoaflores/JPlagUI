@@ -7,26 +7,69 @@
  * user guide available at https://docs.gradle.org/2.14.1/userguide/tutorial_java_projects.html
  */
 
-// Apply the java plugin to add support for Java
 apply plugin: 'java'
 
-// In this section you declare where to find the dependencies of your project
 repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenCentral()
 }
 
-// In this section you declare the dependencies for your production and test code
 dependencies {
-	runtime files("./lib/jplag-2.11.9-SNAPSHOT-jar-with-dependencies.jar")
-
-    // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.21'
+    testCompile 'junit:junit:4+'
+    
+	compile fileTree(dir: 'libs', include: '*.jar')
+//	compile files("./libs/jplag-2.11.9-SNAPSHOT-jar-with-dependencies.jar")
+}
 
-    // Declare the dependency for your favourite test framework you want to use in your tests.
-    // TestNG is also supported by the Gradle Test task. Just change the
-    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
-    // 'test.useTestNG()' to your build script.
-    testCompile 'junit:junit:4.12'
+version     = '1.0.0'
+description ="""
+GUI for JPlag
+Project name: ${project.name}
+More Information on JPlag   at <https://github.com/jplag>
+More information on JPlagUI at <https://github.com/robertoaflores/JPlagUI>
+"""
+
+task jarSwing (type: Jar) {
+    baseName = "jplagSwing"
+    version  = "1.1"
+    
+   	manifest {
+       	attributes \
+           	'Main-Class' : 'edu.cnu.cs.jplagui.swing.JPlagUI', \
+           	'Implementation-Title' : baseName, \
+           	'Implementation-Version' : version, \
+           	'Built-By': System.getProperty('user.name'), \
+           	'Built-JDK': System.getProperty('java.version'), \
+           	'Build-Time': new Date().format("yyyy-MM-dd' 'HH:mm:ss")
+   	}
+   	from {
+		configurations.compile.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+   	} with jar
+}
+task jarFX (type: Jar) {
+    baseName = "jplagfx"
+    version  = "1.0"
+
+	from('src/main/java/') {
+		include '**/*.css'
+		include '**/*.fxml'
+	}
+
+   	manifest {
+       	attributes \
+           	'Main-Class' : 'edu.cnu.cs.jplagui.javafx.JPlagUI', \
+           	'Implementation-Title' : baseName, \
+           	'Implementation-Version' : version, \
+           	'Built-By': System.getProperty('user.name'), \
+           	'Built-JDK': System.getProperty('java.version'), \
+           	'Build-Time': new Date().format("yyyy-MM-dd' 'HH:mm:ss")
+   	}
+   	from {
+		configurations.compile.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+   	} with jar
 }
