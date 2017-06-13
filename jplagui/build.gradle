@@ -8,6 +8,7 @@
  */
 
 apply plugin: 'java'
+apply plugin: 'eclipse'
 
 repositories {
     jcenter()
@@ -27,7 +28,7 @@ description = """
 GUI for JPlag
 Project name: ${project.name}
 More Information on JPlag   at <https://github.com/jplag>
-More information on JPlagUI at <https://github.com/robertoaflores/JPlagUI>
+More information on JPlagUI at <https://github.com/robertoaflores/jplagui>
 """
 
 task jarSwing (type: Jar, description: "Builds an executable Swing jar ") {
@@ -50,7 +51,7 @@ task jarSwing (type: Jar, description: "Builds an executable Swing jar ") {
 		}
    	} with jar
 }
-task jarFX (type: Jar, description: "Builds an executable Swing jar ") {
+task jarFX (type: Jar, description: "Builds an executable JavaFX jar ") {
     group "build"
     baseName = "jplaguiFX"
     version  = "1.0"
